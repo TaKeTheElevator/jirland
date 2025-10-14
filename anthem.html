@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="ru" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Гимн Жирляндии — Республика Жирляндия</title>
+    <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        telegram: {
+                            dark: '#17212b',
+                            darker: '#0e1621',
+                            blue: '#2b5278',
+                            lightblue: '#85a7ce',
+                            sky: '#9db8df',
+                            // Light theme colors
+                            light: {
+                                bg: '#f8fafc',
+                                card: '#ffffff',
+                                border: '#e2e8f0',
+                                text: '#1e293b',
+                                'text-muted': '#64748b',
+                                accent: '#3b82f6',
+                                'accent-hover': '#2563eb',
+                                gradient: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'
+                            }
+                        }
+                    },
+                    fontFamily: {
+                        'sans': ['Inter', 'ui-sans-serif', 'system-ui'],
+                        'serif': ['Georgia', 'serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <script>
+        (function(){
+            try{
+                var stored = localStorage.getItem('theme');
+                var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                if (stored === 'dark' || (!stored && prefersDark)) {
+                    document.documentElement.classList.add('dark');
+                    document.documentElement.classList.remove('light-theme');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                    document.documentElement.classList.add('light-theme');
+                }
+                if (!stored) {
+                    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e){
+                        if (!localStorage.getItem('theme')){
+                            if (e.matches) {
+                                document.documentElement.classList.add('dark');
+                                document.documentElement.classList.remove('light-theme');
+                            } else {
+                                document.documentElement.classList.remove('dark');
+                                document.documentElement.classList.add('light-theme');
+                            }
+                        }
+                    });
+                }
+            }catch(e){}
+        })();
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&display=swap');
+        
+        .scroll-smooth {
+            scroll-behavior: smooth;
+        }
+        
+        /* Beautiful light theme styling */
+        .light-theme {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #f1f5f9 100%);
+        }
+        
+        .light-theme .bg-telegram-dark {
+            background: rgba(255, 255, 255, 0.85) !important;
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(226, 232, 240, 0.6) !important;
+            box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.08), 0 8px 16px -4px rgba(0, 0, 0, 0.04) !important;
+        }
+        
+        .light-theme .bg-telegram-dark\/50 {
+            background: rgba(255, 255, 255, 0.7) !important;
+            backdrop-filter: blur(10px);
+        }
+        
+        .light-theme .bg-telegram-dark\/80 {
+            background: rgba(255, 255, 255, 0.9) !important;
+            backdrop-filter: blur(12px);
+        }
+        
+        .light-theme .text-gray-100 {
+            color: #0f172a !important;
+        }
+        
+        .light-theme .text-gray-300 {
+            color: #475569 !important;
+        }
+        
+        .light-theme .text-telegram-lightblue {
+            color: #1e40af !important;
+        }
+        
+        .light-theme .text-telegram-sky {
+            color: #1e40af !important;
+        }
+        
+        .light-theme .bg-gradient-to-r {
+            background: #3b82f6 !important;
+        }
+        
+        .light-theme .border-telegram-blue\/20 {
+            border-color: rgba(59, 130, 246, 0.15) !important;
+        }
+        
+        .light-theme .shadow-2xl {
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.08), 0 10px 20px -5px rgba(0, 0, 0, 0.04) !important;
+        }
+        
+        .light-theme .hover\:bg-telegram-blue\/20:hover {
+            background-color: rgba(59, 130, 246, 0.08) !important;
+        }
+        
+        .light-theme .bg-telegram-blue {
+            background: #3b82f6 !important;
+        }
+        
+        .light-theme .hover\:bg-telegram-blue:hover {
+            background: #2563eb !important;
+        }
+        
+        .light-theme .bg-telegram-blue\/10 {
+            background: rgba(59, 130, 246, 0.05) !important;
+        }
+        
+        .light-theme .hover\:text-white:hover {
+            color: #1e40af !important;
+        }
+        
+        /* Anthem specific styling */
+        .anthem-text {
+            font-family: 'Playfair Display', serif;
+            line-height: 1.8;
+            text-align: center;
+        }
+        
+        .anthem-title {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+        }
+        
+        .signature-line {
+            border-bottom: 1px solid rgba(59, 130, 246, 0.3);
+            width: 200px;
+            margin: 0 auto;
+        }
+        
+        .official-stamp {
+            background: #3b82f6;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            text-align: center;
+            margin: 1rem auto;
+            max-width: 300px;
+        }
+        
+        .light-theme .official-stamp {
+            background: #3b82f6;
+            color: white;
+        }
+        /* Parallax Background */
+        .parallax-bg {
+            background-image: url('assets/background.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            opacity: 0.3;
+            filter: brightness(0.4) contrast(1.2);
+        }
+        
+        .light-theme .parallax-bg {
+            opacity: 0.2;
+            filter: brightness(0.6) contrast(1.1);
+        }
+        
+        /* Styled Audio Player */
+        .audio-player {
+            background: rgba(23, 33, 43, 0.9);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.3);
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        .light-theme .audio-player {
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .player-controls {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .play-pause-btn {
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            border: none;
+            border-radius: 50%;
+            width: 3rem;
+            height: 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+        }
+        
+        .play-pause-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 16px rgba(59, 130, 246, 0.5);
+        }
+        
+        .time-display {
+            font-family: 'Inter', monospace;
+            font-size: 0.9rem;
+            color: #85a7ce;
+            min-width: 80px;
+        }
+        
+        .light-theme .time-display {
+            color: #1e40af;
+        }
+        
+        .progress-container {
+            flex: 1;
+            height: 6px;
+            background: rgba(59, 130, 246, 0.2);
+            border-radius: 3px;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .light-theme .progress-container {
+            background: rgba(59, 130, 246, 0.1);
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #3b82f6, #85a7ce);
+            border-radius: 3px;
+            width: 0%;
+            transition: width 0.1s ease;
+            position: relative;
+        }
+        
+        .progress-bar::after {
+            content: '';
+            position: absolute;
+            right: -6px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 12px;
+            height: 12px;
+            background: white;
+            border-radius: 50%;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .progress-container:hover .progress-bar::after {
+            opacity: 1;
+        }
+        
+        .volume-control {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .volume-slider {
+            width: 80px;
+            height: 4px;
+            background: rgba(59, 130, 246, 0.2);
+            border-radius: 2px;
+            outline: none;
+            cursor: pointer;
+        }
+        
+        .light-theme .volume-slider {
+            background: rgba(59, 130, 246, 0.1);
+        }
+        
+        .volume-slider::-webkit-slider-thumb {
+            appearance: none;
+            width: 12px;
+            height: 12px;
+            background: #3b82f6;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        
+        .volume-slider::-moz-range-thumb {
+            width: 12px;
+            height: 12px;
+            background: #3b82f6;
+            border-radius: 50%;
+            cursor: pointer;
+            border: none;
+        }
+        
+        .player-title {
+            text-align: center;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #85a7ce;
+        }
+        
+        .light-theme .player-title {
+            color: #1e40af;
+        }
+    </style>
+</head>
+<body class="bg-telegram-dark text-gray-100 font-sans scroll-smooth">
+    <!-- Parallax Background -->
+    <div class="parallax-bg fixed inset-0 -z-30"></div>
+    
+    <!-- Audio Player -->
+    <audio id="anthem-audio" preload="metadata">
+        <source src="assets/gimn.mp3" type="audio/mpeg">
+        Ваш браузер не поддерживает аудио элемент.
+    </audio>
+    <!-- Header -->
+    <header class="bg-telegram-dark/80 backdrop-blur-md border-b border-telegram-blue/20 sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <img src="assets/icon/music.webp" alt="music" width="32" height="32">
+                <h1 class="text-xl font-bold text-telegram-lightblue">Гимн Жирляндии</h1>
+            </div>
+            <div class="flex items-center gap-3">
+                <button id="theme-toggle" class="p-2 rounded-full hover:bg-telegram-blue/20 transition">
+                    <i data-feather="moon" class="dark:hidden"></i>
+                    <i data-feather="sun" class="hidden dark:block"></i>
+                </button>
+                <a href="index.html" class="text-telegram-sky hover:text-white transition">← На главную</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8 max-w-4xl">
+        <!-- Official Header -->
+        <div class="bg-telegram-dark/50 rounded-xl p-8 mb-8 border border-telegram-blue/20 shadow-2xl text-center">
+            <h1 class="anthem-title text-4xl font-bold mb-4 text-telegram-lightblue">ГИМН РЕСПУБЛИКИ ЖИРЛЯНДИЯ</h1>
+            <p class="text-lg text-telegram-sky mb-2">Официальный государственный гимн</p>
+            <p class="text-sm text-gray-300">Утверждён Жировым Собранием Республики Жирляндия</p>
+        </div>
+
+        <!-- Anthem Text -->
+        <div class="bg-telegram-dark/50 rounded-xl p-8 mb-8 border border-telegram-blue/20 shadow-2xl">
+            <!-- Styled Audio Player -->
+            <div class="audio-player mb-8">
+                <div class="player-title">
+                    <img src="assets/icon/music.webp" alt="music" width="24" height="24" class="inline mr-2">
+                    Государственный гимн Жирляндии
+                </div>
+                <div class="player-controls">
+                    <button id="play-pause-btn" class="play-pause-btn">
+                        <i data-feather="play" class="play-icon"></i>
+                    </button>
+                    <div class="time-display">
+                        <span id="current-time">0:00</span> / <span id="total-time">0:00</span>
+                    </div>
+                    <div class="progress-container" id="progress-container">
+                        <div class="progress-bar" id="progress-bar"></div>
+                    </div>
+                    <div class="volume-control">
+                        <i data-feather="volume-2" class="volume-icon"></i>
+                        <input type="range" class="volume-slider" id="volume-slider" min="0" max="100" value="70">
+                    </div>
+                </div>
+            </div>
+            <div class="anthem-text text-lg">
+                <p class="mb-6">
+                    <strong>Жирляндия – священная наша страна,<br>
+                    Жирляндия – как рай для едока.<br>
+                    Здесь бургеры, сабы и КФС точки<br>
+                    Открыты всегда – на все времена!</strong>
+                </p>
+                
+                <p class="mb-6">
+                    <em>Припев:</em><br>
+                    <strong>Обжорствуй, республика наша свободная,<br>
+                    Бургерных сетей союз вековой,<br>
+                    Калории правят, диету долой,<br>
+                    Обжорствуй, страна! Мы гордимся тобой!</strong>
+                </p>
+                
+                <p class="mb-6">
+                    Где кухни работают без перерыва,<br>
+                    Где до фудкортов просторы велики.<br>
+                    Мы знаем секрет нашего счастья:<br>
+                    Чем больше здесь ешь, тем богаче в стране!
+                </p>
+                
+                <p class="mb-6">
+                    <em>Припев:</em><br>
+                    <strong>Обжорствуй, республика наша свободная,<br>
+                    Бургерных сетей союз вековой,<br>
+                    Калории правят, диету долой,<br>
+                    Обжорствуй, страна! Мы гордимся тобой!</strong>
+                </p>
+                
+                <p class="mb-6">
+                    Мы верим в божественную пиццу,<br>
+                    В картошку фри и наггетсы тоже.<br>
+                    Нам силу даёт наша верность еде,<br>
+                    Так было, так есть и так будет всегда!
+                </p>
+                
+                <p class="mb-8">
+                    <em>Припев:</em><br>
+                    <strong>Обжорствуй, республика наша свободная,<br>
+                    Бургерных сетей союз вековой,<br>
+                    Калории правят, диету долой,<br>
+                    Обжорствуй, страна! Мы гордимся тобой!</strong>
+                </p>
+            </div>
+        </div>
+
+        <!-- Official Signatures -->
+        <div class="bg-telegram-dark/50 rounded-xl p-8 mb-8 border border-telegram-blue/20 shadow-2xl">
+            <h2 class="anthem-title text-2xl font-bold mb-6 text-telegram-lightblue text-center">Официальные подписи</h2>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Совет Трёх Жиров -->
+                <div class="text-center">
+                    <h3 class="text-lg font-semibold mb-4 text-telegram-sky">Совет Трёх Жиров</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <p class="font-medium mb-2">Первый Триарх</p>
+                            <div class="signature-line mb-2"></div>
+                            <p class="text-sm text-gray-300">Подпись</p>
+                        </div>
+                        <div>
+                            <p class="font-medium mb-2">Второй Триарх</p>
+                            <div class="signature-line mb-2"></div>
+                            <p class="text-sm text-gray-300">Подпись</p>
+                        </div>
+                        <div>
+                            <p class="font-medium mb-2">Третий Триарх</p>
+                            <div class="signature-line mb-2"></div>
+                            <p class="text-sm text-gray-300">Подпись</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Жировое Собрание -->
+                <div class="text-center">
+                    <h3 class="text-lg font-semibold mb-4 text-telegram-sky">Жировое Собрание</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <p class="font-medium mb-2">Председатель Собрания</p>
+                            <div class="signature-line mb-2"></div>
+                            <p class="text-sm text-gray-300">Подпись</p>
+                        </div>
+                        <div>
+                            <p class="font-medium mb-2">Секретарь Собрания</p>
+                            <div class="signature-line mb-2"></div>
+                            <p class="text-sm text-gray-300">Подпись</p>
+                        </div>
+                        <div>
+                            <p class="font-medium mb-2">Министр Культуры</p>
+                            <div class="signature-line mb-2"></div>
+                            <p class="text-sm text-gray-300">Подпись</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Official Stamp and Date -->
+        <div class="bg-telegram-dark/50 rounded-xl p-8 border border-telegram-blue/20 shadow-2xl text-center">
+            <div class="official-stamp">
+                <p>ОФИЦИАЛЬНО УТВЕРЖДЕНО</p>
+                <p class="text-sm mt-1">Республика Жирляндия</p>
+            </div>
+            
+            <div class="mt-6 space-y-2">
+                <p class="text-lg font-semibold text-telegram-lightblue">Дата утверждения:</p>
+                <p class="text-xl">1 октября 2025 года</p>
+                <p class="text-sm text-gray-300">День Всенародного пельменного фестиваля</p>
+            </div>
+            
+            <div class="mt-6 space-y-2">
+                <p class="text-lg font-semibold text-telegram-lightblue">Вступил в силу:</p>
+                <p class="text-xl">15 октября 2025 года</p>
+                <p class="text-sm text-gray-300">С момента официального опубликования</p>
+            </div>
+            
+            <div class="mt-8 p-4 bg-telegram-blue/10 rounded-lg">
+                <p class="text-sm text-telegram-sky">
+                    <strong>Примечание:</strong> Гимн исполняется на официальных церемониях, 
+                    при поднятии Государственного флага, на приёмах с участием высших органов власти, 
+                    а также по предписанным законом случаям.
+                </p>
+            </div>
+        </div>
+
+        <!-- Download Section -->
+        <div class="bg-telegram-dark/50 rounded-xl p-8 mb-8 border border-telegram-blue/20 shadow-2xl text-center">
+            <h2 class="text-2xl font-bold mb-4 text-telegram-lightblue">Официальные документы</h2>
+            <p class="text-gray-300 mb-6">Скачайте официальный документ с текстом гимна и официальными подписями</p>
+            <a href="assets/gimn.docx" download="Гимн_Жирляндии.docx" class="bg-telegram-blue hover:bg-telegram-blue/80 text-white font-medium py-3 px-8 rounded-full transition-all inline-flex items-center shadow-lg hover:shadow-telegram-blue/30">
+                <i data-feather="download" class="mr-2"></i> Скачать официальный документ
+            </a>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-telegram-dark/50 border-t border-telegram-blue/20 mt-16">
+        <div class="container mx-auto px-4 py-8 text-center">
+            <p class="text-gray-300 mb-4">© 2024 Республика Жирляндия. Все права защищены.</p>
+            <div class="flex justify-center space-x-6">
+                <a href="index.html" class="text-telegram-sky hover:text-white transition">Главная</a>
+                <a href="constitution.html" class="text-telegram-sky hover:text-white transition">Конституция</a>
+                <a href="passport.html" class="text-telegram-sky hover:text-white transition">Паспорт</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Feather icons
+        feather.replace();
+        
+        // Theme toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        themeToggle.addEventListener('click', () => {
+            const isDark = document.documentElement.classList.toggle('dark');
+            const isLight = document.documentElement.classList.toggle('light-theme');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            
+            // Update feather icons
+            feather.replace();
+        });
+
+        // Anthem Audio Player
+        const anthemAudio = document.getElementById('anthem-audio');
+        const playPauseBtn = document.getElementById('play-pause-btn');
+        const playIcon = playPauseBtn.querySelector('.play-icon');
+        const currentTimeSpan = document.getElementById('current-time');
+        const totalTimeSpan = document.getElementById('total-time');
+        const progressBar = document.getElementById('progress-bar');
+        const progressContainer = document.getElementById('progress-container');
+        const volumeSlider = document.getElementById('volume-slider');
+
+        // Format time helper
+        function formatTime(seconds) {
+            const mins = Math.floor(seconds / 60);
+            const secs = Math.floor(seconds % 60);
+            return `${mins}:${secs.toString().padStart(2, '0')}`;
+        }
+
+        if (playPauseBtn && anthemAudio) {
+            // Set initial volume
+            anthemAudio.volume = volumeSlider.value / 100;
+
+            // Play/Pause functionality
+            playPauseBtn.addEventListener('click', () => {
+                if (anthemAudio.paused) {
+                    anthemAudio.play();
+                    playIcon.setAttribute('data-feather', 'pause');
+                    feather.replace();
+                } else {
+                    anthemAudio.pause();
+                    playIcon.setAttribute('data-feather', 'play');
+                    feather.replace();
+                }
+            });
+
+            // Update time display
+            anthemAudio.addEventListener('timeupdate', () => {
+                currentTimeSpan.textContent = formatTime(anthemAudio.currentTime);
+                const progress = (anthemAudio.currentTime / anthemAudio.duration) * 100;
+                progressBar.style.width = `${progress}%`;
+            });
+
+            // Update total time when metadata loads
+            anthemAudio.addEventListener('loadedmetadata', () => {
+                totalTimeSpan.textContent = formatTime(anthemAudio.duration);
+            });
+
+            // Progress bar click to seek
+            progressContainer.addEventListener('click', (e) => {
+                const rect = progressContainer.getBoundingClientRect();
+                const clickX = e.clientX - rect.left;
+                const width = rect.width;
+                const percentage = clickX / width;
+                anthemAudio.currentTime = percentage * anthemAudio.duration;
+            });
+
+            // Volume control
+            volumeSlider.addEventListener('input', (e) => {
+                anthemAudio.volume = e.target.value / 100;
+            });
+
+            // Reset when ended
+            anthemAudio.addEventListener('ended', () => {
+                playIcon.setAttribute('data-feather', 'play');
+                feather.replace();
+                progressBar.style.width = '0%';
+                currentTimeSpan.textContent = '0:00';
+            });
+        }
+    </script>
+</body>
+</html>

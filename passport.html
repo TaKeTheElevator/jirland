@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Паспорт Жирляндии</title>
+    <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        telegram: {
+                            dark: '#17212b',
+                            darker: '#0e1621',
+                            blue: '#2b5278',
+                            lightblue: '#85a7ce',
+                            sky: '#9db8df'
+                        }
+                    },
+                    fontFamily: {
+                        'sans': ['Inter', 'ui-sans-serif', 'system-ui']
+                    }
+                }
+            }
+        }
+    </script>
+    <script>
+        (function(){
+            try{
+                var stored = localStorage.getItem('theme');
+                var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                if (stored === 'dark' || (!stored && prefersDark)) {
+                    document.documentElement.classList.add('dark');
+                    document.documentElement.classList.remove('light-theme');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                    document.documentElement.classList.add('light-theme');
+                }
+                if (!stored) {
+                    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e){
+                        if (!localStorage.getItem('theme')){
+                            if (e.matches) {
+                                document.documentElement.classList.add('dark');
+                                document.documentElement.classList.remove('light-theme');
+                            } else {
+                                document.documentElement.classList.remove('dark');
+                                document.documentElement.classList.add('light-theme');
+                            }
+                        }
+                    });
+                }
+            }catch(e){}
+        })();
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        .scroll-smooth {
+            scroll-behavior: smooth;
+        }
+        .passport-card {
+            background: linear-gradient(145deg, rgba(30, 58, 138, 0.2), rgba(15, 23, 42, 0.8));
+            backdrop-filter: blur(10px);
+        }
+        .form-input {
+            background-color: rgba(15, 23, 42, 0.5);
+            border-color: rgba(59, 130, 246, 0.3);
+        }
+        .form-input:focus {
+            border-color: rgba(59, 130, 246, 0.8);
+            box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+        }
+        /* Preview overlay font styling to match template */
+        #p_tLast, #p_tFirst, #p_tMiddle, #p_tBirth, #p_tIssue, #p_tCode {
+            font-family: 'cambria-bold', serif;
+            color: #595959;
+            text-shadow: 0 0 .5px rgba(0,0,0,.25);
+        }
+        
+        /* Beautiful light theme styling */
+        .light-theme {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #f1f5f9 100%);
+        }
+        
+        .light-theme .bg-telegram-dark {
+            background: rgba(255, 255, 255, 0.85) !important;
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(226, 232, 240, 0.6) !important;
+            box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.08), 0 8px 16px -4px rgba(0, 0, 0, 0.04) !important;
+        }
+        
+        .light-theme .bg-telegram-dark\/50 {
+            background: rgba(255, 255, 255, 0.7) !important;
+            backdrop-filter: blur(10px);
+        }
+        
+        .light-theme .bg-telegram-dark\/80 {
+            background: rgba(255, 255, 255, 0.9) !important;
+            backdrop-filter: blur(12px);
+        }
+        
+        .light-theme .text-gray-100 {
+            color: #0f172a !important;
+        }
+        
+        .light-theme .text-gray-300 {
+            color: #475569 !important;
+        }
+        
+        .light-theme .text-gray-400 {
+            color: #64748b !important;
+        }
+        
+        .light-theme .text-telegram-lightblue {
+            color: #1e40af !important;
+        }
+        
+        .light-theme .text-telegram-sky {
+            color: #1e40af !important;
+        }
+        
+        .light-theme .bg-gradient-to-r {
+            background: #3b82f6 !important;
+        }
+        
+        .light-theme .border-telegram-blue\/20 {
+            border-color: rgba(59, 130, 246, 0.15) !important;
+        }
+        
+        .light-theme .border-telegram-blue\/30 {
+            border-color: rgba(59, 130, 246, 0.2) !important;
+        }
+        
+        .light-theme .shadow-2xl {
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.08), 0 10px 20px -5px rgba(0, 0, 0, 0.04) !important;
+        }
+        
+        .light-theme .shadow-lg {
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.06), 0 4px 6px -2px rgba(0, 0, 0, 0.03) !important;
+        }
+        
+        .light-theme .hover\:bg-telegram-blue\/20:hover {
+            background-color: rgba(59, 130, 246, 0.08) !important;
+        }
+        
+        .light-theme .bg-telegram-blue {
+            background: #3b82f6 !important;
+        }
+        
+        .light-theme .hover\:bg-telegram-blue:hover {
+            background: #2563eb !important;
+        }
+        
+        .light-theme .bg-telegram-blue\/60 {
+            background: rgba(59, 130, 246, 0.7) !important;
+        }
+        
+        .light-theme .hover\:bg-telegram-blue\/80:hover {
+            background: rgba(59, 130, 246, 0.85) !important;
+        }
+        
+        .light-theme .bg-telegram-blue\/10 {
+            background: rgba(59, 130, 246, 0.05) !important;
+        }
+        
+        .light-theme .hover\:text-white:hover {
+            color: #1e40af !important;
+        }
+        
+        .light-theme .passport-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+        }
+        
+        .light-theme .form-input {
+            background-color: rgba(255, 255, 255, 0.7);
+            border-color: rgba(59, 130, 246, 0.2);
+        }
+        
+        .light-theme .form-input:focus {
+            border-color: rgba(59, 130, 246, 0.5);
+            box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
+        }
+        
+        /* Parallax Background */
+        .parallax-bg {
+            background-image: url('assets/background.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            opacity: 0.3;
+            filter: brightness(0.4) contrast(1.2);
+        }
+        
+        .light-theme .parallax-bg {
+            opacity: 0.2;
+            filter: brightness(0.6) contrast(1.1);
+        }
+    </style>
+</head>
+<body class="bg-white text-gray-900 dark:bg-telegram-dark dark:text-gray-100 font-sans scroll-smooth">
+    <!-- Parallax Background -->
+    <div class="parallax-bg fixed inset-0 -z-30"></div>
+    
+    <!-- Audio Player -->
+    <audio id="anthem-audio" preload="metadata">
+        <source src="assets/gimn.mp3" type="audio/mpeg">
+        Ваш браузер не поддерживает аудио элемент.
+    </audio>
+    <!-- Header -->
+    <header class="bg-white/80 dark:bg-telegram-dark/80 backdrop-blur-md sticky top-0 z-50 border-b border-telegram-blue/30 shadow-lg">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <span class="text-3xl">📇</span>
+                <h1 class="text-xl font-bold text-telegram-lightblue">Паспорт Жирляндии</h1>
+            </div>
+            <div class="flex items-center gap-3">
+                <button id="play-anthem" class="p-2 rounded-full hover:bg-telegram-blue/20 transition" title="Слушать гимн">
+                    <i data-feather="play" class="play-icon"></i>
+                </button>
+                <button id="theme-toggle" class="p-2 rounded-full hover:bg-telegram-blue/20 transition">
+                    <i data-feather="moon" class="dark:hidden"></i>
+                    <i data-feather="sun" class="hidden dark:block"></i>
+                </button>
+                <a href="index.html" class="text-telegram-sky hover:text-white transition">← На главную</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+ 
+    <!-- Functional passport generator (copied from working implementation) -->
+    <section class="container mx-auto px-4 py-8 max-w-4xl">
+        <div class="passport-card rounded-2xl overflow-hidden border border-telegram-blue/30 shadow-2xl p-8">
+            <h3 class="text-2xl font-bold text-center bg-gradient-to-r from-telegram-lightblue to-telegram-accent bg-clip-text text-transparent mb-6">Оформление паспорта</h3>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="space-y-3">
+                    <div>
+                        <label class="block text-sm text-gray-400 mb-1" for="p_lastName">Фамилия</label>
+                        <input id="p_lastName" class="w-full form-input rounded-lg px-4 py-2 border focus:outline-none"/>
+                    </div>
+                    <div>
+                        <label class="block text-sm text-gray-400 mb-1" for="p_firstName">Имя</label>
+                        <input id="p_firstName" class="w-full form-input rounded-lg px-4 py-2 border focus:outline-none"/>
+                    </div>
+                    <div>
+                        <label class="block text-sm text-gray-400 mb-1" for="p_middleName">Отчество</label>
+                        <input id="p_middleName" class="w-full form-input rounded-lg px-4 py-2 border focus:outline-none"/>
+                    </div>
+                    <div>
+                        <label class="block text-sm text-gray-400 mb-1" for="p_birthDate">Дата рождения</label>
+                        <input id="p_birthDate" type="date" class="w-full form-input rounded-lg px-4 py-2 border focus:outline-none"/>
+                        <div class="mt-1 text-xs text-gray-400">Быстрый выбор: <button type="button" data-year="2000" class="p-quick-year underline hover:no-underline">2000</button> · <button type="button" data-year="1990" class="p-quick-year underline hover:no-underline">1990</button> · <button type="button" data-year="1980" class="p-quick-year underline hover:no-underline">1980</button></div>
+                    </div>
+                    <div>
+                        <label class="block text-sm text-gray-400 mb-1">Фото</label>
+                        <div id="p_drop" class="w-full bg-telegram-dark/50 border-2 border-dashed border-telegram-blue/40 rounded-xl p-6 text-center cursor-pointer">
+                            <div class="flex flex-col items-center gap-2">
+                                <i data-feather="upload-cloud" class="w-8 h-8 text-telegram-sky"></i>
+                                <p class="text-sm text-telegram-sky">Перетащите фото сюда, нажмите для выбора или вставьте (Ctrl/Cmd+V)</p>
+                            </div>
+                            <input id="p_file" type="file" accept="image/*" class="hidden"/>
+                        </div>
+                        <div id="p_previewWrap" class="mt-2 hidden"><img id="p_preview" class="w-32 h-40 object-cover rounded-lg border border-telegram-blue/30"/></div>
+                    </div>
+                    <div class="flex items-start">
+                        <input type="checkbox" id="p_terms" class="mt-1 mr-3">
+                        <label for="p_terms" class="text-sm text-gray-300">Я принимаю условия <a href="constitution.html" class="text-telegram-sky hover:underline">Конституции TelegramVerse</a> и согласен с обработкой моих данных.</label>
+                    </div>
+                    <div class="flex gap-3">
+                        <button id="p_previewBtn" class="bg-gradient-to-r from-telegram-blue to-telegram-accent hover:from-telegram-lightblue hover:to-telegram-accent/90 text-white px-5 py-2 rounded-full transition">Предпросмотр</button>
+                        <button id="p_downloadBtn" class="bg-gradient-to-r from-telegram-blue to-telegram-accent hover:from-telegram-lightblue hover:to-telegram-accent/90 text-white px-5 py-2 rounded-full transition">Скачать PNG</button>
+                    </div>
+                </div>
+                    <div>
+                    <div id="p_previewContainer" class="relative bg-telegram-dark/40 rounded-xl p-2 border border-telegram-blue/30 invisible">
+                        <img id="p_bg" src="assets/passport.png" style="position: relative; z-index: 10;" class="w-full h-auto rounded-lg" alt="Шаблон">
+                        <div class="absolute inset-0 pointer-events-none">
+                            <div id="p_tLast" class="absolute" style="z-index: 10;left:65%;top:58.8%;transform:translate(-50%,-50%);font-weight:800;color:#000;opacity:.54"></div>
+                            <div id="p_tFirst" class="absolute" style="z-index: 10;left:65%;top:62.6%;transform:translate(-50%,-50%);font-weight:800;color:#000;opacity:.54"></div>
+                            <div id="p_tMiddle" class="absolute" style="z-index: 10;left:65%;top:69.1%;transform:translate(-50%,-50%);font-weight:800;color:#000;opacity:.54"></div>
+                            <div id="p_tBirth" class="absolute" style="z-index: 10;left:65%;top:72.6%;transform:translate(-50%,-50%);font-weight:800;color:#000;opacity:.54"></div>
+                            <div id="p_tIssue" class="absolute" style="z-index: 10;left:27%;top:23.6%;transform:translate(-50%,-50%);font-weight:800;color:#000;opacity:.54"></div>
+                            <div id="p_tCode" class="absolute" style="z-index: 10; left:77%;top:28.8%;transform:translate(-50%,-50%);font-weight:800;color:#888000;text-align:center"></div>
+                            <div id="p_photoBox" class="absolute" style="left:6.7%;top:59%;width:28%;height:28%;overflow:hidden;transform:rotate(1.2deg);border:2px solid rgba(0,0,0,.15);"><img id="p_tPhoto" style="width:100%;height:100%;object-fit:cover;object-position:center;"></div>
+                        </div>
+                        <canvas id="p_canvas" class="hidden"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-telegram-dark/80 backdrop-blur-md border-t border-telegram-blue/30 py-8">
+        <div class="container mx-auto px-4 text-center text-sm text-gray-400">
+            <p>© 2023 TelegramVerse Neo Digital Nation. Все права защищены.</p>
+        </div>
+    </footer>
+
+
+    <script>
+        feather.replace();
+        
+        // Generate random ID
+        document.addEventListener('DOMContentLoaded', () => {
+            const randomId = 'TVN-' + Math.random().toString(36).substring(2, 6).toUpperCase() + 
+                            '-' + Math.random().toString(36).substring(2, 6).toUpperCase();
+            document.getElementById('random-id').textContent = randomId.split('TVN-')[1];
+        });
+
+        // Unified theme: system default + user toggle
+        (function(){
+            try{
+                var stored = localStorage.getItem('theme');
+                var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                if (stored === 'dark' || (!stored && prefersDark)) {
+                    document.documentElement.classList.add('dark');
+                    document.documentElement.classList.remove('light-theme');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                    document.documentElement.classList.add('light-theme');
+                }
+                if (!stored) {
+                    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e){
+                        if (!localStorage.getItem('theme')){
+                            if (e.matches) {
+                                document.documentElement.classList.add('dark');
+                                document.documentElement.classList.remove('light-theme');
+                            } else {
+                                document.documentElement.classList.remove('dark');
+                                document.documentElement.classList.add('light-theme');
+                            }
+                        }
+                    });
+                }
+            }catch(e){}
+        })();
+        document.getElementById('theme-toggle')?.addEventListener('click', function(){ 
+            var isDark=document.documentElement.classList.toggle('dark'); 
+            var isLight=document.documentElement.classList.toggle('light-theme'); 
+            localStorage.setItem('theme', isDark?'dark':'light'); 
+            feather.replace();
+        });
+
+        // Anthem Audio Player
+        const anthemAudio = document.getElementById('anthem-audio');
+        const playButton = document.getElementById('play-anthem');
+        const playIcon = playButton.querySelector('.play-icon');
+
+        if (playButton && anthemAudio) {
+            playButton.addEventListener('click', () => {
+                if (anthemAudio.paused) {
+                    anthemAudio.play();
+                    playIcon.setAttribute('data-feather', 'pause');
+                    playButton.title = 'Пауза';
+                    feather.replace();
+                } else {
+                    anthemAudio.pause();
+                    playIcon.setAttribute('data-feather', 'play');
+                    playButton.title = 'Слушать гимн';
+                    feather.replace();
+                }
+            });
+
+            anthemAudio.addEventListener('ended', () => {
+                playIcon.setAttribute('data-feather', 'play');
+                playButton.title = 'Слушать гимн';
+                feather.replace();
+            });
+        }
+
+        // Functional logic copied and enhanced (no auth/server)
+        const p_drop = document.getElementById('p_drop');
+        const p_file = document.getElementById('p_file');
+        const p_preview = document.getElementById('p_preview');
+        const p_previewWrap = document.getElementById('p_previewWrap');
+        let p_photoDataUrl = '';
+        p_drop.addEventListener('click', ()=>p_file.click());
+        p_drop.addEventListener('dragover', (e)=>{ e.preventDefault(); p_drop.classList.add('dragover'); });
+        p_drop.addEventListener('dragleave', ()=>p_drop.classList.remove('dragover'));
+        p_drop.addEventListener('drop', (e)=>{ e.preventDefault(); p_drop.classList.remove('dragover'); if(e.dataTransfer.files?.length) handlePFile(e.dataTransfer.files[0]); });
+        p_file.addEventListener('change', (e)=>{ if(e.target.files?.length) handlePFile(e.target.files[0]); });
+        // Paste from clipboard
+        window.addEventListener('paste', (e)=>{ const item = (e.clipboardData||{}).items ? Array.from(e.clipboardData.items).find(i=>i.type.startsWith('image/')) : null; if(item){ const f=item.getAsFile(); if(f) handlePFile(f); } });
+        function handlePFile(file){ if(!file.type.startsWith('image/')) return alert('Выберите изображение'); if(file.size>5*1024*1024) return alert('До 5 МБ'); const r=new FileReader(); r.onload=(ev)=>{ p_photoDataUrl=ev.target.result; p_preview.src=p_photoDataUrl; p_previewWrap.classList.remove('hidden'); }; r.readAsDataURL(file); }
+
+        const p_bg = document.getElementById('p_bg');
+        const p_tLast = document.getElementById('p_tLast');
+        const p_tFirst = document.getElementById('p_tFirst');
+        const p_tMiddle = document.getElementById('p_tMiddle');
+        const p_tBirth = document.getElementById('p_tBirth');
+        const p_tIssue = document.getElementById('p_tIssue');
+        const p_tCode = document.getElementById('p_tCode');
+        const p_tPhoto = document.getElementById('p_tPhoto');
+        const p_canvas = document.getElementById('p_canvas');
+        const p_ctx = p_canvas.getContext('2d');
+
+        function todayRu(){const d=new Date();return `${String(d.getDate()).padStart(2,'0')}.${String(d.getMonth()+1).padStart(2,'0')}.${d.getFullYear()}`}
+        function genCode(){ return String(Math.floor(100000 + Math.random()*900000)); }
+        function p_scaleFonts(){ const base=1200; const w=p_bg.getBoundingClientRect().width; const k=Math.max(.5,Math.min(2,w/base)); const set=(el,px)=>el.style.fontSize=`${Math.round(px*k)}px`; set(p_tLast,25); set(p_tFirst,25); set(p_tMiddle,25); set(p_tBirth,25); set(p_tIssue,25); set(p_tCode,25); }
+        window.addEventListener('resize', p_scaleFonts);
+
+        function p_collect(){ return { lastName: document.getElementById('p_lastName').value.trim(), firstName: document.getElementById('p_firstName').value.trim(), middleName: document.getElementById('p_middleName').value.trim(), birthDate: document.getElementById('p_birthDate').value, issueDate: todayRu(), code: genCode(), photo: p_photoDataUrl }; }
+        function p_fillOverlay(d){ p_tLast.textContent=(d.lastName||'').toUpperCase(); p_tFirst.textContent=(d.firstName||'').toUpperCase(); p_tMiddle.textContent=(d.middleName||'').toUpperCase(); p_tBirth.textContent = (function(){ if(!d.birthDate) return ''; const dt=new Date(d.birthDate); return `${String(dt.getDate()).padStart(2,'0')}.${String(dt.getMonth()+1).padStart(2,'0')}.${dt.getFullYear()}`; })(); p_tIssue.textContent=d.issueDate; p_tCode.textContent=d.code; if(d.photo) p_tPhoto.src=d.photo; else p_tPhoto.removeAttribute('src'); p_scaleFonts(); }
+
+        document.getElementById('p_previewBtn').addEventListener('click', ()=>{ const d=p_collect(); if(!d.lastName||!d.firstName||!d.birthDate) return alert('Заполните поля'); p_fillOverlay(d); document.getElementById('p_previewContainer').classList.remove('invisible'); });
+        document.getElementById('p_downloadBtn').addEventListener('click', ()=>{ const d=p_collect(); if(!d.lastName||!d.firstName||!d.birthDate) return alert('Заполните поля'); if(!document.getElementById('p_terms').checked) return alert('Подтвердите условия'); p_fillOverlay(d); p_renderToPNG(true, `Паспорт ${d.lastName||''}.png`); });
+
+        function p_renderToPNG(download, fileName){
+            const wrap = p_bg.closest('div.relative') || p_bg.parentElement;
+            const rectWrap = wrap.getBoundingClientRect();
+            p_canvas.width = p_bg.naturalWidth; p_canvas.height = p_bg.naturalHeight;
+            const kx = p_canvas.width/rectWrap.width; const ky = p_canvas.height/rectWrap.height;
+            const photoBox = document.getElementById('p_photoBox');
+            const r = photoBox.getBoundingClientRect();
+            const x = (r.left - rectWrap.left) * kx; const y = (r.top - rectWrap.top) * ky; const w = r.width*kx; const h=r.height*ky;
+
+            // Advanced text layer: draw with grain/soft shadow inside glyphs
+            const drawTextLayer = ()=>{
+                const textLayer=document.createElement('canvas'); textLayer.width=p_canvas.width; textLayer.height=p_canvas.height; const tc=textLayer.getContext('2d');
+                const drawOne=(el, fixedPx)=>{ const rr=el.getBoundingClientRect(); const cx=(rr.left-rectWrap.left+rr.width/2)*kx; const cy=(rr.top-rectWrap.top+rr.height/2)*ky; const fs=fixedPx; const col=getComputedStyle(el).color||'#595959'; const alpha=parseFloat(getComputedStyle(el).opacity||'1'); tc.save(); tc.globalAlpha=alpha; tc.fillStyle=col; tc.textAlign='center'; tc.font=`800 ${Math.max(10,fs)}px cambria-bold, serif`; tc.fillText((el.textContent||'').toUpperCase(),cx,cy);
+                    const grain=document.createElement('canvas'); grain.width=p_canvas.width; grain.height=p_canvas.height; const gctx=grain.getContext('2d'); const imgData=gctx.createImageData(p_canvas.width,p_canvas.height); for(let i=0;i<imgData.data.length;i+=4){ const n=132+Math.floor((Math.random()-0.5)*8); imgData.data[i]=n; imgData.data[i+1]=n; imgData.data[i+2]=n; imgData.data[i+3]=14; } gctx.putImageData(imgData,0,0); gctx.globalCompositeOperation='destination-in'; gctx.drawImage(textLayer,0,0); tc.drawImage(gctx.canvas,0,0); tc.restore(); };
+                // Use fixed pixel sizes (independent of screen), slightly smaller
+                drawOne(p_tLast, 40);
+                drawOne(p_tFirst, 40);
+                drawOne(p_tMiddle, 40);
+                drawOne(p_tBirth, 38);
+                drawOne(p_tIssue, 38);
+                drawOne(p_tCode, 34);
+                p_ctx.drawImage(textLayer,0,0);
+            };
+
+            p_ctx.clearRect(0,0,p_canvas.width,p_canvas.height);
+            // photo
+            if (p_tPhoto && p_tPhoto.src){ const img=new Image(); img.crossOrigin='anonymous'; img.onload=()=>{ const sx=img.naturalWidth, sy=img.naturalHeight; const sc=Math.max(w/sx,h/sy); const dw=sx*sc, dh=sy*sc; const dx=x+(w-dw)/2, dy=y+(h-dh)/2; p_ctx.drawImage(img,dx,dy,dw,dh); p_ctx.drawImage(p_bg,0,0,p_canvas.width,p_canvas.height); drawTextLayer(); if(download){ const link=document.createElement('a'); link.download=fileName||'passport.png'; link.href=p_canvas.toDataURL('image/png'); link.click(); } }; img.src=p_tPhoto.src; } else { p_ctx.drawImage(p_bg,0,0,p_canvas.width,p_canvas.height); drawTextLayer(); if(download){ const link=document.createElement('a'); link.download=fileName||'passport.png'; link.href=p_canvas.toDataURL('image/png'); link.click(); } }
+        }
+
+        // Quick year buttons
+        document.querySelectorAll('.p-quick-year').forEach(btn=>btn.addEventListener('click',()=>{ const y=+btn.dataset.year; const bd=document.getElementById('p_birthDate'); const d=new Date(y,0,1); bd.value = `${String(d.getFullYear()).padStart(4,'0')}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`; }));
+    </script>
+</body>
+</html>

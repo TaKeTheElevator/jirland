@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Конституция Жирляндии</title>
+    <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        telegram: {
+                            dark: '#17212b',
+                            darker: '#0e1621',
+                            blue: '#2b5278',
+                            lightblue: '#85a7ce',
+                            sky: '#9db8df',
+                            // Light theme colors
+                            light: {
+                                bg: '#f8fafc',
+                                card: '#ffffff',
+                                border: '#e2e8f0',
+                                text: '#1e293b',
+                                'text-muted': '#64748b',
+                                accent: '#3b82f6',
+                                'accent-hover': '#2563eb',
+                                gradient: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'
+                            }
+                        }
+                    },
+                    fontFamily: {
+                        'sans': ['Inter', 'ui-sans-serif', 'system-ui']
+                    }
+                }
+            }
+        }
+    </script>
+    <script>
+        (function(){
+            try{
+                var stored = localStorage.getItem('theme');
+                var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                if (stored === 'dark' || (!stored && prefersDark)) {
+                    document.documentElement.classList.add('dark');
+                    document.documentElement.classList.remove('light-theme');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                    document.documentElement.classList.add('light-theme');
+                }
+                if (!stored) {
+                    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e){
+                        if (!localStorage.getItem('theme')){
+                            if (e.matches) {
+                                document.documentElement.classList.add('dark');
+                                document.documentElement.classList.remove('light-theme');
+                            } else {
+                                document.documentElement.classList.remove('dark');
+                                document.documentElement.classList.add('light-theme');
+                            }
+                        }
+                    });
+                }
+            }catch(e){}
+        })();
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        .scroll-smooth {
+            scroll-behavior: smooth;
+        }
+        .constitution-article {
+            background: linear-gradient(145deg, rgba(30, 58, 138, 0.05), rgba(15, 23, 42, 0.3));
+            backdrop-filter: blur(5px);
+            border-left: 4px solid transparent;
+            transition: all 0.3s ease;
+        }
+        .constitution-article:hover {
+            border-left-color: rgba(59, 130, 246, 0.5);
+            background: linear-gradient(145deg, rgba(30, 58, 138, 0.08), rgba(15, 23, 42, 0.4));
+        }
+        .article-content {
+            position: relative;
+        }
+        .article-content::before {
+            content: '';
+            position: absolute;
+            left: -2px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, rgba(59, 130, 246, 0.3), rgba(147, 197, 253, 0.3));
+            border-radius: 1px;
+        }
+        .article-number {
+            display: inline-block;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(147, 197, 253, 0.1));
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: rgba(59, 130, 246, 0.8);
+            margin-right: 0.75rem;
+        }
+        .article-text {
+            line-height: 1.7;
+            color: rgba(55, 65, 81, 0.9);
+        }
+        .dark .article-text {
+            color: rgba(209, 213, 219, 0.9);
+        }
+        
+        /* Beautiful light theme styling */
+        .light-theme {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+        }
+        
+        .light-theme .bg-telegram-dark {
+            background: rgba(255, 255, 255, 0.95) !important;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(226, 232, 240, 0.8) !important;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05) !important;
+        }
+        
+        .light-theme .text-gray-100 {
+            color: #1e293b !important;
+        }
+        
+        .light-theme .text-gray-300 {
+            color: #64748b !important;
+        }
+        
+        .light-theme .text-telegram-lightblue {
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .light-theme .bg-gradient-to-r {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+        }
+        
+        .light-theme .border-telegram-blue\/20 {
+            border-color: rgba(59, 130, 246, 0.2) !important;
+        }
+        
+        .light-theme .shadow-2xl {
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15) !important;
+        }
+        
+        .light-theme .hover\:bg-telegram-blue\/20:hover {
+            background-color: rgba(59, 130, 246, 0.1) !important;
+        }
+        
+        .light-theme .bg-telegram-blue {
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6) !important;
+        }
+        
+        .light-theme .hover\:bg-telegram-blue:hover {
+            background: linear-gradient(135deg, #2563eb, #7c3aed) !important;
+        }
+        .toc-link:hover {
+            color: #93c5fd;
+            border-left-color: #3b82f6;
+        }
+        .active-article {
+            background: rgba(27, 65, 175, 0.2);
+            border-left: 4px solid #3b82f6;
+        }
+        
+        /* Beautiful light theme styling */
+        .light-theme {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #f1f5f9 100%);
+        }
+        
+        .light-theme .bg-telegram-dark {
+            background: rgba(255, 255, 255, 0.85) !important;
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(226, 232, 240, 0.6) !important;
+            box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.08), 0 8px 16px -4px rgba(0, 0, 0, 0.04) !important;
+        }
+        
+        .light-theme .bg-telegram-dark\/50 {
+            background: rgba(255, 255, 255, 0.7) !important;
+            backdrop-filter: blur(10px);
+        }
+        
+        .light-theme .bg-telegram-dark\/80 {
+            background: rgba(255, 255, 255, 0.9) !important;
+            backdrop-filter: blur(12px);
+        }
+        
+        .light-theme .text-gray-100 {
+            color: #0f172a !important;
+        }
+        
+        .light-theme .text-gray-300 {
+            color: #475569 !important;
+        }
+        
+        .light-theme .text-telegram-lightblue {
+            color: #1e40af !important;
+        }
+        
+        .light-theme .text-telegram-sky {
+            color: #1e40af !important;
+        }
+        
+        .light-theme .bg-gradient-to-r {
+            background: #3b82f6 !important;
+        }
+        
+        .light-theme .border-telegram-blue\/20 {
+            border-color: rgba(59, 130, 246, 0.15) !important;
+        }
+        
+        .light-theme .border-telegram-blue\/30 {
+            border-color: rgba(59, 130, 246, 0.2) !important;
+        }
+        
+        .light-theme .shadow-2xl {
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.08), 0 10px 20px -5px rgba(0, 0, 0, 0.04) !important;
+        }
+        
+        .light-theme .shadow-lg {
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.06), 0 4px 6px -2px rgba(0, 0, 0, 0.03) !important;
+        }
+        
+        .light-theme .hover\:bg-telegram-blue\/20:hover {
+            background-color: rgba(59, 130, 246, 0.08) !important;
+        }
+        
+        .light-theme .bg-telegram-blue {
+            background: #3b82f6 !important;
+        }
+        
+        .light-theme .hover\:bg-telegram-blue:hover {
+            background: #2563eb !important;
+        }
+        
+        .light-theme .bg-telegram-blue\/60 {
+            background: rgba(59, 130, 246, 0.7) !important;
+        }
+        
+        .light-theme .hover\:bg-telegram-blue\/80:hover {
+            background: rgba(59, 130, 246, 0.85) !important;
+        }
+        
+        .light-theme .bg-telegram-blue\/10 {
+            background: rgba(59, 130, 246, 0.05) !important;
+        }
+        
+        .light-theme .hover\:text-white:hover {
+            color: #1e40af !important;
+        }
+        
+        .light-theme .constitution-article {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(8px);
+        }
+        
+        .light-theme .constitution-article:hover {
+            background: rgba(255, 255, 255, 0.8);
+            border-left-color: rgba(59, 130, 246, 0.3);
+        }
+        
+        .light-theme .active-article {
+            background: rgba(59, 130, 246, 0.1);
+            border-left: 4px solid #3b82f6;
+        }
+        
+        /* Parallax Background */
+        .parallax-bg {
+            background-image: url('assets/background.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            opacity: 0.3;
+            filter: brightness(0.4) contrast(1.2);
+        }
+        
+        .light-theme .parallax-bg {
+            opacity: 0.2;
+            filter: brightness(0.6) contrast(1.1);
+        }
+    </style>
+</head>
+<body class="bg-white text-gray-900 dark:bg-telegram-dark dark:text-gray-100 font-sans scroll-smooth">
+    <!-- Parallax Background -->
+    <div class="parallax-bg fixed inset-0 -z-30"></div>
+    
+    <!-- Audio Player -->
+    <audio id="anthem-audio" preload="metadata">
+        <source src="assets/gimn.mp3" type="audio/mpeg">
+        Ваш браузер не поддерживает аудио элемент.
+    </audio>
+    <!-- Header -->
+    <header class="bg-white/80 dark:bg-telegram-dark/80 backdrop-blur-md sticky top-0 z-50 border-b border-telegram-blue/30 shadow-lg">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <span class="text-3xl">📜</span>
+                <h1 class="text-xl font-bold text-telegram-lightblue">Конституция Жирляндии</h1>
+            </div>
+            <div class="flex items-center gap-3">
+                <button id="play-anthem" class="p-2 rounded-full hover:bg-telegram-blue/20 transition" title="Слушать гимн">
+                    <i data-feather="play" class="play-icon"></i>
+                </button>
+                <button id="theme-toggle" class="p-2 rounded-full hover:bg-telegram-blue/20 transition">
+                    <i data-feather="moon" class="dark:hidden"></i>
+                    <i data-feather="sun" class="hidden dark:block"></i>
+                </button>
+                <a href="index.html" class="text-telegram-sky hover:text-white transition">← На главную</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8 lg:flex">
+        <!-- Table of Contents -->
+        <aside class="lg:w-1/4 lg:pr-8 mb-8 lg:mb-0 sticky top-24 self-start">
+            <div class="bg-white/70 dark:bg-telegram-dark/50 rounded-xl p-4 border border-telegram-blue/20 shadow-lg hidden md:block">
+                <h2 class="text-lg font-bold mb-4 text-telegram-sky">Содержание</h2>
+                <nav id="toc" class="space-y-2"></nav>
+            </div>
+        </aside>
+
+        <!-- Constitution Content -->
+        <div class="lg:w-3/4">
+            <!-- Preamble -->
+            <section id="preamble" class="constitution-article rounded-xl p-6 mb-8 border border-telegram-blue/20 shadow-lg">
+                <h2 class="text-2xl font-bold mb-6 text-telegram-sky">Конституция Республики Жирляндия</h2>
+                <p class="leading-relaxed">Настоящая Конституция устанавливает основы государственного строя Республики Жирляндия, систему органов власти, права и обязанности граждан, а также государственные символы и порядок внесения изменений.</p>
+            </section>
+
+            <!-- Chapter 1 -->
+            <section id="chapter1" class="constitution-article rounded-xl p-6 mb-8 border border-telegram-blue/20 shadow-lg">
+                <h2 class="text-2xl font-bold mb-6 text-telegram-sky">Глава I. Общие положения</h2>
+                <article class="mb-6">
+                    <h3 class="text-xl font-semibold mb-3 text-telegram-lightblue flex items-center">
+                        <span class="article-number">Статья 1</span>Официальное наименование
+                    </h3>
+                    <div class="article-content pl-4">
+                        <p class="article-text mb-2">1.1. Полное наименование: Республика Жирляндия.</p>
+                        <p class="article-text">1.2. Короткое наименование: Жирляндия.</p>
+                    </div>
+                </article>
+                <article class="mb-6">
+                    <h3 class="text-xl font-semibold mb-3 text-telegram-lightblue flex items-center">
+                        <span class="article-number">Статья 2</span>Форма правления
+                    </h3>
+                    <div class="article-content pl-4">
+                        <p class="article-text mb-2">2.1. Форма правления: адипократия (жирократия) — несменяемый триумвират.</p>
+                        <p class="article-text mb-2">2.2. Высший исполнительный орган: Совет Трёх Жиров.</p>
+                        <p class="article-text mb-2">2.3. Высший законодательный орган: Жировое Собрание.</p>
+                        <p class="article-text">2.4. Высший судебный орган: Жирный Суд.</p>
+                    </div>
+                </article>
+                <article class="mb-6">
+                    <h3 class="text-xl font-semibold mb-3 text-telegram-lightblue flex items-center">
+                        <span class="article-number">Статья 3</span>Столица
+                    </h3>
+                    <div class="article-content pl-4">
+                        <p class="article-text">3.1. Столица государства — город Жирбург.</p>
+                    </div>
+                </article>
+                <article class="mb-6">
+                    <h3 class="text-xl font-semibold mb-3 text-telegram-lightblue flex items-center">
+                        <span class="article-number">Статья 4</span>Валюта и эмитент
+                    </h3>
+                    <div class="article-content pl-4">
+                        <p class="article-text mb-2">4.1. Национальная валюта — жирляндский шекель/агор (JSH).</p>
+                        <p class="article-text">4.2. Эмитент и регулятор денежного обращения — Центральный Банк Жирляндии.</p>
+                    </div>
+                </article>
+                <article>
+                    <h3 class="text-xl font-semibold mb-3 text-telegram-lightblue flex items-center">
+                        <span class="article-number">Статья 5</span>Государственные язык и религия
+                    </h3>
+                    <div class="article-content pl-4">
+                        <p class="article-text mb-2">5.1. Государственные языки: русский и иврит.</p>
+                        <p class="article-text">5.2. Государственная религия: пастафарианство; сохраняется свобода вероисповедания.</p>
+                    </div>
+                </article>
+            </section>
+
+            <!-- Chapter 2 -->
+            <section id="chapter2" class="constitution-article rounded-xl p-6 mb-8 border border-telegram-blue/20 shadow-lg">
+                <h2 class="text-2xl font-bold mb-6 text-telegram-sky">Глава II. Органы государственной власти</h2>
+                <article class="mb-6">
+                    <h3 class="text-xl font-semibold mb-3 text-telegram-lightblue flex items-center">
+                        <span class="article-number">Статья 6</span>Исполнительная власть
+                    </h3>
+                    <div class="article-content pl-4">
+                        <p class="article-text mb-2">6.1. Исполнительная власть осуществляется Советом Трёх Жиров (Триархат).</p>
+                        <p class="article-text mb-2">6.2. Члены Совета — три Триарха, несменяемые. Власть переходит в наследственном порядке. Официальными наследниками Членов Совета являются граждане Республики Жирляндия, имеющие наибольшую жировую долю массы тела.</p>
+                        <p class="article-text">6.3. Полномочия, ритуалы и порядок заседаний устанавливаются регламентом Совета.</p>
+                    </div>
+                </article>
+                <article class="mb-6">
+                    <h3 class="text-xl font-semibold mb-3 text-telegram-lightblue flex items-center">
+                        <span class="article-number">Статья 7</span>Законодательная власть
+                    </h3>
+                    <div class="article-content pl-4">
+                        <p class="article-text mb-2">7.1. Законодательный орган — Жировое Собрание.</p>
+                        <p class="article-text">7.2. Состав Жирового Собрания формируется в порядке, определённом законом. Собрание принимает законы, государственный бюджет и контрольные акты.</p>
+                    </div>
+                </article>
+                <article>
+                    <h3 class="text-xl font-semibold mb-3 text-telegram-lightblue flex items-center">
+                        <span class="article-number">Статья 8</span>Судебная власть
+                    </h3>
+                    <div class="article-content pl-4">
+                        <p class="article-text mb-2">8.1. Высший судебный орган — Суд Справедливого Пуза.</p>
+                        <p class="article-text mb-2">8.2. Глава суда носит титул Верховного Пузосудьи; судьи назначаются по представлению Совета Трёх Жиров.</p>
+                        <p class="article-text">8.3. Суд обеспечивает верховенство закона, трактует Конституцию и решает споры между органами власти и гражданами.</p>
+                    </div>
+                </article>
+            </section>
+
+            <!-- Chapter 3 -->
+            <section id="chapter3" class="constitution-article rounded-xl p-6 mb-8 border border-telegram-blue/20 shadow-lg">
+                <h2 class="text-2xl font-bold mb-6 text-telegram-sky">Глава III. Исполнительная структура — министерства и силовые структуры</h2>
+                <article class="mb-6">
+                    <h3 class="text-xl font-semibold mb-3 text-telegram-lightblue flex items-center">
+                        <span class="article-number">Статья 9</span>Система министерств
+                    </h3>
+                    <div class="article-content pl-4">
+                        <p class="article-text mb-3">9.1. Основные министерства:</p>
+                        <ul class="list-disc list-inside space-y-2 text-sm">
+                            <li class="article-text">Министерство Питания и Отдыха — отвечает за продовольственную политику и досуг;</li>
+                            <li class="article-text">Министерство Здоровья и Комфорта — отвечает за систему здравоохранения и стандарты комфорта;</li>
+                            <li class="article-text">Министерство Бургерной Культуры — культурная политика и фестивали;</li>
+                            <li class="article-text">Министерство Войны — оборона и мобилизация (Жировой Легион);</li>
+                            <li class="article-text">Министерство Жирового Порядка — внутренний порядок и регламенты поведения;</li>
+                            <li class="article-text">Министерство Экономики и Пельменной Промышленности — промышленная и экономическая политика;</li>
+                            <li class="article-text">Министерство Образования и Кулинарной Науки — образование, наука, исследования в гастрономии;</li>
+                            <li class="article-text">Министерство Транспорта и Широкой Инфраструктуры — дороги, транспорт, логистика;</li>
+                            <li class="article-text">Министерство Иностранных Жирных Дел — внешняя политика и дипломатия.</li>
+                        </ul>
+                    </div>
+                </article>
+                <article>
+                    <h3 class="text-xl font-semibold mb-3 text-telegram-lightblue flex items-center">
+                        <span class="article-number">Статья 10</span>Силовые структуры
+                    </h3>
+                    <div class="article-content pl-4">
+                        <p class="article-text mb-3">10.1. Система правопорядка и безопасности включает:</p>
+                        <ul class="list-disc list-inside space-y-2 text-sm">
+                            <li class="article-text">Полиция — Пузатая Стража (обеспечение внутреннего порядка);</li>
+                            <li class="article-text">Армия — Жировой Легион (обеспечение обороноспособности).</li>
+                        </ul>
+                    </div>
+                </article>
+            </section>
+
+            <!-- Chapter 4 -->
+            <section id="chapter4" class="constitution-article rounded-xl p-6 mb-8 border border-telegram-blue/20 shadow-lg">
+                <h2 class="text-2xl font-bold mb-6 text-telegram-sky">Глава IV. Экономика, СМИ и коммуникации</h2>
+                <article class="mb-6">
+                    <h3 class="text-xl font-semibold mb-3 text-telegram-lightblue flex items-center">
+                        <span class="article-number">Статья 11</span>Экономическая основа
+                    </h3>
+                    <div class="article-content pl-4">
+                        <p class="article-text">11.1. Ключевые отрасли: пельменная промышленность, маслобойное производство, ресторанная отрасль, индустрия одежды plus-size, производство сала и сопутствующие секторы.</p>
+                    </div>
+                </article>
+                <article class="mb-6">
+                    <h3 class="text-xl font-semibold mb-3 text-telegram-lightblue flex items-center">
+                        <span class="article-number">Статья 12</span>Финансовая система
+                    </h3>
+                    <div class="article-content pl-4">
+                        <p class="article-text mb-2">12.1. Центральный Банк Жирляндии регулирует эмиссию жирляндского шекеля (JSH), обеспечивает экономическую стабильность и монетарную политику.</p>
+                        <p class="article-text">12.2. Предлагаемые номиналы: банкноты — 1, 5, 10, 20, 50, 100 JSH; монеты — 1, 5, 10, 50 агор.</p>
+                    </div>
+                </article>
+                <article>
+                    <h3 class="text-xl font-semibold mb-3 text-telegram-lightblue flex items-center">
+                        <span class="article-number">Статья 13</span>СМИ
+                    </h3>
+                    <div class="article-content pl-4">
+                        <p class="article-text mb-2">13.1. Государственные медиа: «Жировая Газета» (печатные СМИ), «Пельмень ТВ» (телеканал).</p>
+                        <p class="article-text">13.2. Официальный домен: .jl / .жл.</p>
+                    </div>
+                </article>
+            </section>
+
+            <!-- Chapter 5 -->
+            <section id="chapter5" class="constitution-article rounded-xl p-6 mb-8 border border-telegram-blue/20 shadow-lg">
+                <h2 class="text-2xl font-bold mb-6 text-telegram-sky">Глава V. Государственные символы, награды и праздники</h2>
+                <article class="mb-6">
+                    <h3 class="text-xl font-semibold mb-3 text-telegram-lightblue flex items-center">
+                        <span class="article-number">Статья 14</span>Государственная символика
+                    </h3>
+                    <div class="article-content pl-4">
+                        <p class="article-text">14.1. Государственными символами Жирляндии являются Государственный флаг, Государственный герб и Государственный гимн.</p>
+                    </div>
+                </article>
+                <article class="mb-6">
+                    <h3 class="text-xl font-semibold mb-3 text-telegram-lightblue flex items-center">
+                        <span class="article-number">Статья 15</span>Описание флага
+                    </h3>
+                    <div class="article-content pl-4">
+                        <p class="article-text">15.1. Государственный флаг Жирляндии — полотнище прямоугольной формы в соотношении 2:3 с основными цветами …</p>
+                    </div>
+                </article>
+                <article class="mb-6">
+                    <h3 class="text-xl font-semibold mb-3 text-telegram-lightblue flex items-center">
+                        <span class="article-number">Статья 16</span>Описание герба
+                    </h3>
+                    <div class="article-content pl-4">
+                        <p class="article-text">16.1. Государственный герб Жирляндии — щит со стилизованным изображением …</p>
+                    </div>
+                </article>
+                <article class="mb-6">
+                    <h3 class="text-xl font-semibold mb-3 text-telegram-lightblue flex items-center">
+                        <span class="article-number">Статья 17</span>Государственный гимн
+                    </h3>
+                    <div class="article-content pl-4">
+                        <p class="article-text mb-2">17.1. Государственный гимн Жирляндии исполняется на официальных церемониях, при поднятии Государственного флага, на приёмах с участием высших органов власти, а также по предписанным законом случаям.</p>
+                        <p class="article-text">17.2. Текст и правила исполнения гимна утверждаются Жировым Собранием по представлению Совета Трёх Жиров.</p>
+                    </div>
+                </article>
+                <article class="mb-6">
+                    <h3 class="text-xl font-semibold mb-3 text-telegram-lightblue flex items-center">
+                        <span class="article-number">Статья 18</span>Использование, защита и ответственность
+                    </h3>
+                    <div class="article-content pl-4">
+                        <p class="article-text mb-2">18.1. Государственные символы пользуются особой правовой охраной. Оскорбление, умышленное искажение, неподобающее использование Государственного флага, герба или гимна влечёт ответственность, определяемую законом.</p>
+                        <p class="article-text">18.2. Коммерческое воспроизведение изображений символов допускается в порядке, установленном законом; для использования на товарах и рекламе требуется согласование с Министерством Культуры и Центральным Банком Жирляндии (в части банкнотных изображений).</p>
+                    </div>
+                </article>
+                <article>
+                    <h3 class="text-xl font-semibold mb-3 text-telegram-lightblue flex items-center">
+                        <span class="article-number">Статья 19</span>Символика и награды
+                    </h3>
+                    <div class="article-content pl-4">
+                        <p class="article-text mb-2">19.1. Приняты ордена и медали: Герой Республики Жирляндия; Орден Пельменного Общества; Орден Золотого Жира; Медаль Совета Трёх Жиров; Медаль за заслуги перед Жирляндией; Почётный Пельменный страж.</p>
+                        <p class="article-text">19.2. Девиз и символы определяются отдельным актом.</p>
+                    </div>
+                </article>
+                <article class="mb-6">
+                    <h3 class="text-xl font-semibold mb-3 text-telegram-lightblue flex items-center">
+                        <span class="article-number">Статья 20</span>Национальные праздники
+                    </h3>
+                    <div class="article-content pl-4">
+                        <ul class="list-disc list-inside space-y-2 text-sm">
+                            <li class="article-text">1 мая — День бездельничества и чрезмерного поедания;</li>
+                            <li class="article-text">30 июня — День Почётного Пуза;</li>
+                            <li class="article-text">15–20 июля — Всенародный пельменный фестиваль;</li>
+                            <li class="article-text">3 ноября — День Жирной культуры.</li>
+                        </ul>
+                    </div>
+                </article>
+            </section>
+            <section id="chapter6" class="constitution-article rounded-xl p-6 mb-8 border border-telegram-blue/20 shadow-lg">
+                <h2 class="text-2xl font-bold mb-6 text-telegram-sky">Глава VI. Гражданство, паспорт и административное деление</h2>
+                <article class="mb-6">
+                    <h3 class="text-xl font-semibold mb-3 text-telegram-lightblue flex items-center">
+                        <span class="article-number">Статья 21</span>Гражданство и паспорт
+                    </h3>
+                    <div class="article-content pl-4">
+                        <p class="article-text mb-2">21.1. Право гражданства предоставляется по рождению и по натурализации в порядке, установленном законом.</p>
+                        <p class="article-text">21.2. Паспорт гражданина Жирляндии — официальный документ установленного образца.</p>
+                    </div>
+                </article>
+                <article>
+                    <h3 class="text-xl font-semibold mb-3 text-telegram-lightblue flex items-center">
+                        <span class="article-number">Статья 22</span>Административно-территориальное деление
+                    </h3>
+                    <div class="article-content pl-4">
+                        <p class="article-text mb-2">22.1. Государство делится на губернии — субъекты Республики Жирляндия.</p>
+                        <p class="article-text">22.2. Местное самоуправление осуществляется Советами регионов и Губернаторами.</p>
+                    </div>
+                </article>
+            </section>
+            <section id="chapter7" class="constitution-article rounded-xl p-6 mb-8 border border-telegram-blue/20 shadow-lg">
+                <h2 class="text-2xl font-bold mb-6 text-telegram-sky">Глава VII. Внесение изменений</h2>
+                <article>
+                    <h3 class="text-xl font-semibold mb-3 text-telegram-lightblue flex items-center">
+                        <span class="article-number">Статья 23</span>Порядок изменения Конституции
+                    </h3>
+                    <div class="article-content pl-4">
+                        <p class="article-text">23.1. Поправки в Конституцию вносятся по инициативе Совета Трёх Жиров или Жирового Собрания и утверждаются квалифицированным большинством (2/3 от состава Жирового Собрания и абсолютным одобрением Совета Трёх Жиров).</p>
+                    </div>
+                </article>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white/80 dark:bg-telegram-dark/80 backdrop-blur-md border-t border-telegram-blue/30 py-8">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0 text-sm text-gray-600 dark:text-gray-400">Текущая версия Конституции: v2.3.5 (2023)</div>
+                <div class="flex gap-3">
+                    <button id="printBtn" class="bg-telegram-dark/10 dark:bg-telegram-dark/50 hover:bg-telegram-blue/20 text-telegram-sky font-medium py-2 px-4 rounded-full transition border border-telegram-blue/30 inline-flex items-center">
+                        <i data-feather="printer" class="mr-2"></i> Версия для печати
+                    </button>
+                    <button id="docxBtn" class="bg-telegram-dark/10 dark:bg-telegram-dark/50 hover:bg-telegram-blue/20 text-telegram-sky font-medium py-2 px-4 rounded-full transition border border-telegram-blue/30 inline-flex items-center">
+                        <i data-feather="download" class="mr-2"></i> Скачать .docx
+                    </button>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/docx@8.0.0/build/index.js"></script>
+    <script>
+        feather.replace();
+        // theme toggle
+        (function(){ var btn=document.getElementById('theme-toggle'); if(btn){ btn.addEventListener('click', function(){ var isDark=document.documentElement.classList.toggle('dark'); var isLight=document.documentElement.classList.toggle('light-theme'); localStorage.setItem('theme', isDark?'dark':'light'); feather.replace(); }); } })();
+
+        // Anthem Audio Player
+        const anthemAudio = document.getElementById('anthem-audio');
+        const playButton = document.getElementById('play-anthem');
+        const playIcon = playButton.querySelector('.play-icon');
+
+        if (playButton && anthemAudio) {
+            playButton.addEventListener('click', () => {
+                if (anthemAudio.paused) {
+                    anthemAudio.play();
+                    playIcon.setAttribute('data-feather', 'pause');
+                    playButton.title = 'Пауза';
+                    feather.replace();
+                } else {
+                    anthemAudio.pause();
+                    playIcon.setAttribute('data-feather', 'play');
+                    playButton.title = 'Слушать гимн';
+                    feather.replace();
+                }
+            });
+
+            anthemAudio.addEventListener('ended', () => {
+                playIcon.setAttribute('data-feather', 'play');
+                playButton.title = 'Слушать гимн';
+                feather.replace();
+            });
+        }
+
+        // Build hierarchical TOC with articles (desktop + mobile)
+        (function(){
+            const sections = Array.from(document.querySelectorAll('main section[id]'));
+            function build(container){
+                if(!container) return;
+                container.innerHTML='';
+                sections.forEach(sec=>{
+                    const sid = sec.id;
+                    const title = sec.querySelector('h2')?.textContent||sid;
+                    const group = document.createElement('div'); group.className='space-y-1';
+                    const link = document.createElement('a'); link.href = `#${sid}`; link.className='block py-2 px-3 rounded toc-link border-l-2 border-telegram-dark hover:border-telegram-lightblue transition font-medium'; link.textContent=title;
+                    group.appendChild(link);
+                    const arts = Array.from(sec.querySelectorAll('article'));
+                    if(arts.length){
+                        const list = document.createElement('div'); list.className='ml-3 pl-2 border-l border-telegram-blue/30 hidden';
+                        arts.forEach((art, idx)=>{
+                            if(!art.id){ art.id = sid+'-art-'+(idx+1); }
+                            const a = document.createElement('a'); a.href = '#'+art.id; a.className='block py-1 px-2 text-sm text-gray-600 dark:text-gray-300 hover:text-telegram-lightblue'; a.textContent = art.querySelector('h3')?.textContent || ('Статья '+(idx+1));
+                            list.appendChild(a);
+                        });
+                        link.addEventListener('click', (e)=>{ // expand only this group
+                            const lists = container.querySelectorAll('div.ml-3'); lists.forEach(x=>{ if(x!==list) x.classList.add('hidden'); });
+                            list.classList.toggle('hidden');
+                        });
+                        group.appendChild(list);
+                    }
+                    container.appendChild(group);
+                });
+            }
+            build(document.getElementById('toc'));
+            build(document.getElementById('tocMobile'));
+
+            // Active highlight with tighter thresholds
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    const id = entry.target.getAttribute('id');
+                    const links = document.querySelectorAll('.toc-link');
+                    if(entry.isIntersecting){
+                        links.forEach(l=>l.classList.toggle('active-article', l.getAttribute('href')===`#${id}`));
+                        // auto-expand the chapter in desktop menu only
+                        document.querySelectorAll('#toc').forEach(menu=>{
+                            const chapterLink = menu.querySelector(`.toc-link[href="#${id}"]`);
+                            if(chapterLink){ const list = chapterLink.parentElement.querySelector('div.ml-3'); if(list){ list.classList.remove('hidden'); } }
+                        });
+                    }
+                });
+            }, { rootMargin: '-100px 0px -60% 0px', threshold: 0.2 });
+            sections.forEach(section => observer.observe(section));
+
+        })();
+
+        // Print
+        document.getElementById('printBtn')?.addEventListener('click', ()=>{ window.print(); });
+
+        // Export to DOCX
+        document.getElementById('docxBtn')?.addEventListener('click', async ()=>{
+            try{
+                const { Document, Packer, Paragraph, HeadingLevel, TextRun } = window.docx || {};
+                if(!Document){ alert('docx библиотека не загрузилась'); return; }
+                const doc = new Document({ creator: 'Жирляндия' });
+                const blocks = [];
+                const add = (text, level)=>blocks.push(new Paragraph({ text, heading: level }));
+                const addP = (text)=>blocks.push(new Paragraph({ children:[ new TextRun(text) ] }));
+                const allSections = Array.from(document.querySelectorAll('main section'));
+                allSections.forEach(sec=>{
+                    const h2 = sec.querySelector('h2'); if(h2) add(h2.textContent.trim(), HeadingLevel.HEADING_2);
+                    sec.querySelectorAll('article').forEach(art=>{
+                        const h3 = art.querySelector('h3'); if(h3) add(h3.textContent.trim(), HeadingLevel.HEADING_3);
+                        art.querySelectorAll('p, li').forEach(p=> addP(p.textContent.trim()));
+                    });
+                });
+                doc.addSection({ children: blocks });
+                const blob = await Packer.toBlob(doc);
+                const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'Конституция_Жирляндии.docx'; a.click(); URL.revokeObjectURL(a.href);
+            }catch(e){ alert('Не удалось сформировать DOCX: '+e.message); }
+        });
+    </script>
+</body>
+</html>

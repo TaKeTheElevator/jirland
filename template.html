@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Предпросмотр паспорта</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = { darkMode: 'class' };
+    </script>
+    <style>
+        .theme-transition * { transition: background-color .2s ease, color .2s ease; }
+        .canvas-wrap { position: relative; width: 100%; max-width: 900px; margin: 0 auto; }
+        .passport-bg { width: 100%; height: auto; display: block; }
+        .overlay { position: absolute; left: 0; top: 0; right: 0; bottom: 0; pointer-events: none; }
+        .field { position: absolute; font-family: 'cambria-bold', serif; color: #595959;; text-shadow: 0 0 .5px rgba(0,0,0,.25); }
+        /* Позиции остаются, размеры будем масштабировать динамически */
+        .f-last {    left: 65%; top: 58.6%; transform: translate(-50%, -50%); text-align: left; font-weight: 700; color: #595959;}
+        .f-first {   left: 65%; top: 62.4%; transform: translate(-50%, -50%); text-align: left; font-weight: 700; color: #595959;}
+        .tMiddle {    left: 65%;         top: 68.9%; transform: translate(-50%, -50%); text-align: left; font-family: cambria-bold; font-weight: 700; color: #595959;}
+        .f-birth {   left: 65%; top: 72.2%; transform: translate(-50%, -50%); text-align: left; font-weight: 700; color: #595959;}
+        .f-placebirth {     left: 65%;         top: 75.8%; font-size: 25px; width: 43%; transform: translate(-50%, -50%); text-align: left; font-family: cambria-bold; font-weight: 700; color: #595959;}
+        .f-code {        left: 77%;     top: 28.8%; font-size: 25px; width: 35%; transform: translate(-50%, -50%); text-align: center; font-family: cambria-bold; font-weight: 700; color: #888000; opacity: 0.8;}
+        .photo-box { position: absolute;             left: 6.7%; top: 59%; width: 28%; height: 28%; overflow: hidden; transform: rotate(1.2deg); border: 2px solid rgba(0,0,0,.15);}
+        .photo-box img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
+    </style>
+</head>
+<body class="theme-transition bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-100 min-h-screen">
+    <header class="max-w-5xl mx-auto px-4 py-6 flex items-center justify-between">
+        <h1 class="text-2xl font-bold">Предпросмотр паспорта</h1>
+        <div class="flex gap-2">
+            <button id="themeToggle" class="px-3 py-2 rounded bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700">Тема</button>
+            <button id="downloadBtn" class="px-3 py-2 rounded bg-blue-600 text-white hover:bg-blue-700">Скачать PNG</button>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 pb-12">
+        <div class="canvas-wrap">
+            <img id="bg" src="assets/passport.png" alt="Шаблон" class="passport-bg ">
+            <div class="overlay">
+                <div id="tLast" class="field f-last"></div>
+                <div id="tFirst" class="field f-first"></div>
+                <div id="tMiddle" class="field tMiddle"></div>
+                <div id="tBirth" class="field f-birth"></div>
+                <div id="tIssue" class="field" style="    left: 27%;
+                top: 22.6%;
+                transform: translate(-50%, -50%);
+                font-size: 25px;
+                font-weight: 800;"></div>
+                <div id="tCode" class="field f-code" ></div>
+                <div id="tPlaceBirth" class="field f-placebirth">RUSSIA</div>
+                <div class="photo-box"><img id="tPhoto" alt="Фото"></div>
+            </div>
+            <canvas id="canvas" class="hidden"></canvas>
+        </div>
+    </main>
+
+    <script>
+        const themeToggle = document.getElementById('themeToggle');
+        themeToggle.addEventListener('click', () => {
+            document.documentElement.classList.toggle('dark');
+            localStorage.setItem('dark', document.documentElement.classList.contains('dark'));
+        });
+        if (localStorage.getItem('dark') === 'true') document.documentElement.classList.add('dark');
+
+        const data = JSON.parse(localStorage.getItem('passportData') || '{}');
+        const tLast = document.getElementById('tLast');
+        const tFirst = document.getElementById('tFirst');
+        const tBirth = document.getElementById('tBirth');
+        const tPhoto = document.getElementById('tPhoto');
+        const tMiddle = document.getElementById('tMiddle');
+        const tIssue = document.getElementById('tIssue');
+        const tCode = document.getElementById('tCode');
+        const bg = document.getElementById('bg');
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+
+        function scaleFonts() {
+            // Базовая ширина макета, под которую подгонялись шрифты вручную (пример: 1200)
+            const base = 1200;
+            const wrap = document.querySelector('.canvas-wrap');
+            const w = wrap.getBoundingClientRect().width;
+            const k = Math.max(0.5, Math.min(2, w / base)); // ограничим диапазон
+            const set = (el, px) => { el.style.fontSize = `${Math.round(px * k)}px`; };
+            set(document.getElementById('tLast'), 25);
+            set(document.getElementById('tFirst'), 25);
+            set(document.getElementById('tMiddle'), 25);
+            set(document.getElementById('tBirth'), 25);
+            set(document.getElementById('tIssue'), 25);
+            set(document.getElementById('tCode'), 25);
+        }
+
+        function fmt(d) {
+            if (!d) return '';
+            const date = new Date(d);
+            const dd = String(date.getDate()).padStart(2,'0');
+            const mm = String(date.getMonth()+1).padStart(2,'0');
+            const yy = date.getFullYear();
+            return `${dd}.${mm}.${yy}`;
+        }
+
+        function fillOverlay() {
+            tLast.textContent = (data.lastName || '').toUpperCase();
+            tFirst.textContent = (data.firstName || '').toUpperCase();
+            tBirth.textContent = fmt(data.birthDate); // даты оставляем как есть
+            tMiddle.textContent = (data.middleName || '').toUpperCase();
+            tIssue.textContent = data.issueDate ? `${data.issueDate}` : '';
+            tCode.textContent = data.code ? `${String(data.code).toUpperCase()}` : '';
+            if (data.photo) tPhoto.src = data.photo; else tPhoto.removeAttribute('src');
+            scaleFonts();
+        }
+
+        function renderToPNG() {
+            const wrap = document.querySelector('.canvas-wrap');
+            const overlay = document.querySelector('.overlay');
+            const rectWrap = wrap.getBoundingClientRect();
+
+            canvas.width = bg.naturalWidth;
+            canvas.height = bg.naturalHeight;
+
+            // Коэффициент перевода DOM->canvas
+            const kx = canvas.width / rectWrap.width;
+            const ky = canvas.height / rectWrap.height;
+
+            ctx.clearRect(0,0,canvas.width,canvas.height);
+
+            // 1) фото (СНАЧАЛА фото, чтобы ниже водяных знаков)
+            const photoBox = document.querySelector('.photo-box');
+            const r = photoBox.getBoundingClientRect();
+            const x = (r.left - rectWrap.left) * kx;
+            const y = (r.top - rectWrap.top) * ky;
+            const w = r.width * kx;
+            const h = r.height * ky;
+            if (tPhoto.complete && tPhoto.naturalWidth) {
+                const sx = tPhoto.naturalWidth;
+                const sy = tPhoto.naturalHeight;
+                const scale = Math.max(w / sx, h / sy);
+                const dw = sx * scale;
+                const dh = sy * scale;
+                const dx = x + (w - dw) / 2;
+                const dy = y + (h - dh) / 2;
+                ctx.drawImage(tPhoto, dx, dy, dw, dh);
+            }
+
+            // 2) фон (накрывает фото водяными знаками/элементами шаблона)
+            ctx.drawImage(bg, 0, 0, canvas.width, canvas.height);
+
+            // 3) текст
+            // Берём точный цвет из CSS overlay и применяем его напрямую
+            function getColor(el){
+                const c = getComputedStyle(el).color;
+                return c || '#595959';
+            }
+            const textColor = getColor(document.querySelector('.field'));
+            ctx.fillStyle = textColor;
+            ctx.textAlign = 'center';
+            copyText(tLast, parseInt(getComputedStyle(tLast).fontSize));
+            copyText(tFirst, parseInt(getComputedStyle(tFirst).fontSize));
+            copyText(tMiddle, parseInt(getComputedStyle(tMiddle).fontSize));
+            copyText(tBirth, parseInt(getComputedStyle(tBirth).fontSize));
+            copyText(tIssue, parseInt(getComputedStyle(tIssue).fontSize));
+            copyText(tCode, parseInt(getComputedStyle(tCode).fontSize));
+
+            // Имитация печати (смягчение + зерно) тем же цветом
+            const textLayer = document.createElement('canvas');
+            textLayer.width = canvas.width; textLayer.height = canvas.height;
+            const tctx = textLayer.getContext('2d');
+            tctx.fillStyle = textColor;
+            tctx.textAlign = 'center';
+            function copyTextTo(targetCtx, el, fallbackSize){
+                const rr = el.getBoundingClientRect();
+                const cx = (rr.left - rectWrap.left + rr.width/2) * kx;
+                const cy = (rr.top - rectWrap.top + rr.height/2) * ky;
+                const size = (parseInt(getComputedStyle(el).fontSize) || fallbackSize) * kx;
+                targetCtx.font = `700 ${Math.max(12, size)}px cambria-bold, serif`;
+                targetCtx.fillText((el.textContent || '').toUpperCase(), cx, cy);
+            }
+            copyTextTo(tctx, tLast, 24);
+            copyTextTo(tctx, tFirst, 24);
+            copyTextTo(tctx, tMiddle, 22);
+            copyTextTo(tctx, tBirth, 20);
+            copyTextTo(tctx, tIssue, 18);
+            copyTextTo(tctx, tCode, 16);
+
+            const softened = document.createElement('canvas');
+            softened.width = canvas.width; softened.height = canvas.height;
+            const sctx = softened.getContext('2d');
+            sctx.shadowColor = textColor;
+            sctx.shadowBlur = 0.9;
+            sctx.drawImage(textLayer, 0, 0);
+
+            const grain = document.createElement('canvas');
+            grain.width = canvas.width; grain.height = canvas.height;
+            const gctx = grain.getContext('2d');
+            const imgData = gctx.createImageData(canvas.width, canvas.height);
+            for (let i = 0; i < imgData.data.length; i += 4) {
+                const n = 132 + Math.floor((Math.random() - 0.5) * 8);
+                imgData.data[i] = n; imgData.data[i+1] = n; imgData.data[i+2] = n; imgData.data[i+3] = 14;
+            }
+            gctx.putImageData(imgData, 0, 0);
+            gctx.globalCompositeOperation = 'destination-in';
+            gctx.drawImage(textLayer, 0, 0);
+
+            ctx.drawImage(sctx.canvas, 0, 0);
+            ctx.drawImage(gctx.canvas, 0, 0);
+
+            function copyText(el, fallbackPx) {
+                const rr = el.getBoundingClientRect();
+                const cx = (rr.left - rectWrap.left + rr.width/2) * kx;
+                const cy = (rr.top - rectWrap.top + rr.height/2) * ky;
+                const sizeCss = parseInt(getComputedStyle(el).fontSize) || fallbackPx;
+                const size = sizeCss * kx;
+                ctx.font = `700 ${Math.max(12, size)}px cambria-bold, serif`;
+                ctx.fillText((el.textContent || '').toUpperCase(), cx, cy);
+            }
+
+            const link = document.createElement('a');
+            link.download = 'passport.png';
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+        }
+
+        // Заполнение и авто-скачивание после загрузки фона/фото
+        bg.addEventListener('load', () => { fillOverlay(); });
+        window.addEventListener('resize', () => { scaleFonts(); });
+        document.getElementById('downloadBtn').addEventListener('click', renderToPNG);
+        // Авто-рендер через небольшой таймаут (чтобы фото успело загрузиться)
+        window.addEventListener('load', () => { setTimeout(renderToPNG, 400); });
+    </script>
+</body>
+</html>
